@@ -1,5 +1,6 @@
 import ArgentBankLogo from '../../../../src/assets/argentBankLogo.png'
 import { Link } from 'react-router-dom'
+import '@fortawesome/fontawesome-free/css/all.css'
 import './header.css'
 
 function Header() {
