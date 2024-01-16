@@ -1,8 +1,8 @@
 import Home from '../../pages/Home/home'
-import Connection from '../../pages/Connection/connection'
-import Dashboard from '../../pages/Dashboard/dashboard'
+import Login from '../../pages/Login/login'
+import Profile from '../../pages/Profile/profile'
 import Footer from '../Layout/Footer/Footer'
-import Header from '../Layout//Header/Header'
+import Header from '../Layout/Header/Header'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function Routing() {
@@ -11,8 +11,8 @@ function Routing() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/connection" element={<Connection />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
       <Footer />
     </Router>
