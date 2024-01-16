@@ -16,16 +16,16 @@ function Login() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [remember, setRemember] = useState(false)
+  // const [remember, setRemember] = useState(false)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     dispatch(tryConnect({ email, password }))
   }
 
-  const handleRemember = () => {
+  /* const handleRemember = () => {
     setRemember(!remember)
-  }
+  } */
 
   return (
     <main className="main bg-dark">
@@ -55,8 +55,8 @@ function Login() {
             <input
               type="checkbox"
               id="remember-me"
-              checked={remember}
-              onChange={handleRemember}
+              /* checked={remember}
+              onChange={handleRemember}*/
             />
             <label htmlFor="remember-me">Remember me</label>
           </div>
@@ -64,9 +64,7 @@ function Login() {
             Sign In
           </button>
         </form>
-        {remember === true
-          ? authState.token && <Navigate to="/profile" />
-          : authState.token && <Navigate to="/login" />}
+        {authState.token ? <Navigate to="/profile" /> : null}
       </section>
     </main>
   )

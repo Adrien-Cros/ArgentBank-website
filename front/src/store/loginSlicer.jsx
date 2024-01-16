@@ -24,7 +24,7 @@ const authSlice = createSlice({
   },
 })
 
-export const { setToken, setLoading, setError } = authSlice.actions
+export const { setUser, setToken, setLoading, setError } = authSlice.actions
 export default authSlice.reducer
 
 export const tryConnect = createAsyncThunk(

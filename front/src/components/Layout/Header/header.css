@@ -19,6 +19,12 @@
   margin-right: 0.5rem;
 }
 
+.main-nav-flex {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .main-nav-item:hover {
   text-decoration: underline;
 }
