@@ -2,7 +2,12 @@ import ArgentBankLogo from '../../../../src/assets/argentBankLogo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import { setToken } from '../../../store/loginSlicer'
+import {
+  setFirstName,
+  setLastName,
+  setToken,
+  setUsername,
+} from '../../../store/loginSlicer'
 
 import '@fortawesome/fontawesome-free/css/all.css'
 import './header.css'
@@ -15,12 +20,13 @@ function Header() {
   const handleDisconnect = (event) => {
     event.preventDefault()
     dispatch(setToken(null))
+    dispatch(setUsername(null))
+    dispatch(setLastName(null))
+    dispatch(setFirstName(null))
     navigate('/')
   }
 
-  useEffect(() => {
-    dispatch(setToken(null))
-  }, [dispatch])
+  useEffect(() => {}, [dispatch])
 
   return (
     <nav className="main-nav">
@@ -32,12 +38,12 @@ function Header() {
         />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
-      <div className="main-nav-flex">
+      <div className="main-nav-connected">
         {authState.token ? (
           <>
-            <Link to className="main-nav-item">
+            <Link to="/profile" className="main-nav-item">
               <i className="fa fa-user-circle"></i>
-              Tony
+              {authState.userName}
             </Link>
             <Link className="main-nav-item" onClick={handleDisconnect}>
               <i className="fa fa-sign-out"></i>

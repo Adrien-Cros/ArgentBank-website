@@ -19,7 +19,7 @@
   margin-right: 0.5rem;
 }
 
-.main-nav-flex {
+.main-nav-connected {
   display: flex;
   justify-content: space-between;
   gap: 1rem;

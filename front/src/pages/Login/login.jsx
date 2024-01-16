@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { tryConnect } from '../../store/loginSlicer'
+import { userInfo } from '../../store/user'
 
 import '@fortawesome/fontawesome-free/css/all.css'
 import './login.css'
@@ -13,6 +14,12 @@ function Login() {
   useEffect(() => {
     dispatch(tryConnect)
   }, [dispatch])
+
+  useEffect(() => {
+    if (authState.token) {
+      dispatch(userInfo({ token: authState.token }))
+    }
+  }, [dispatch, authState.token])
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -65,6 +72,16 @@ function Login() {
           </button>
         </form>
         {authState.token ? <Navigate to="/profile" /> : null}
+        {authState.error != null && (
+          <div>
+            <p>
+              There is a problem with your Username/Password. Please check for
+              typos or other errors and try again.
+            </p>
+            <p>Error Details: {authState.error}</p>
+          </div>
+        )}
+        {authState.isLoading === true && <p>Loading...</p>}
       </section>
     </main>
   )

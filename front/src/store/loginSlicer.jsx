@@ -3,14 +3,22 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: null,
+    userName: null,
+    firstName: null,
+    lastName: null,
     token: null,
     isLoading: false,
     error: null,
   },
   reducers: {
-    setUser: (state, action) => {
-      state.user = action.payload
+    setUsername: (state, action) => {
+      state.userName = action.payload
+    },
+    setFirstName: (state, action) => {
+      state.firstName = action.payload
+    },
+    setLastName: (state, action) => {
+      state.lastName = action.payload
     },
     setToken: (state, action) => {
       state.token = action.payload
@@ -24,7 +32,14 @@ const authSlice = createSlice({
   },
 })
 
-export const { setUser, setToken, setLoading, setError } = authSlice.actions
+export const {
+  setUsername,
+  setFirstName,
+  setLastName,
+  setToken,
+  setLoading,
+  setError,
+} = authSlice.actions
 export default authSlice.reducer
 
 export const tryConnect = createAsyncThunk(
@@ -44,13 +59,16 @@ export const tryConnect = createAsyncThunk(
       })
 
       const data = await response.json()
-      if (response.ok) {
-        dispatch(setLoading(false))
-        dispatch(setToken(data.body.token))
+
+      if (!response.ok) {
+        throw new Error(data.message)
       }
+
+      dispatch(setLoading(false))
+      dispatch(setToken(data.body.token))
     } catch (error) {
       dispatch(setLoading(false))
-      dispatch(setError(error))
+      dispatch(setError(error.message))
     }
   }
 )

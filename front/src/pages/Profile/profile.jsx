@@ -1,8 +1,11 @@
+import { useSelector } from 'react-redux'
 import AccountSection from '../../components/Profile/AccountSection/AccountSection'
 
 import './profile.css'
 
 function Profile() {
+  const authState = useSelector((state) => state.auth)
+
   const accounts = [
     {
       title: 'Argent Bank Checking (x8349)',
@@ -27,7 +30,7 @@ function Profile() {
         <h1>
           Welcome back
           <br />
-          Tony Jarvis!
+          {authState.firstName} {authState.lastName}
         </h1>
         <button className="edit-button">Edit Name</button>
       </div>
