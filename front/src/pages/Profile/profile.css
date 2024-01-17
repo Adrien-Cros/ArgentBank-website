@@ -2,3 +2,60 @@
   color: #fff;
   margin-bottom: 2rem;
 }
+
+.change-username-content {
+  box-sizing: border-box;
+  background-color: white;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.edit-button-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.edit-button {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+  margin-bottom: 2rem;
+}
+
+.larger {
+  width: 100%;
+}
+
+.input-wrapper-edit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.input-wrapper-edit label {
+  font-weight: bold;
+}
+
+.input-wrapper-edit input {
+  padding: 5px;
+  font-size: 1.2rem;
+  width: 53%;
+}
+
+.disabled {
+  background: lightgrey;
+}

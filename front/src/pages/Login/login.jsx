@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { tryConnect } from '../../store/loginSlicer'
-import { userInfo } from '../../store/user'
+import { tryLogin } from '../../store/loginConnect'
+import { userInfo } from '../../store/userProfile'
 
 import '@fortawesome/fontawesome-free/css/all.css'
 import './login.css'
@@ -12,7 +12,7 @@ function Login() {
   const authState = useSelector((state) => state.auth)
 
   useEffect(() => {
-    dispatch(tryConnect)
+    dispatch(tryLogin)
   }, [dispatch])
 
   useEffect(() => {
@@ -27,7 +27,7 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    dispatch(tryConnect({ email, password }))
+    dispatch(tryLogin({ email, password }))
   }
 
   /* const handleRemember = () => {
