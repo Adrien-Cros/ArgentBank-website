@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { setLoading, setToken, setError } from './loginSlicer'
+import { setLoading, setToken, setError, setLogged } from './loginSlicer'
 
 export const tryLogin = createAsyncThunk(
   'auth/tryLogin',
@@ -24,6 +24,7 @@ export const tryLogin = createAsyncThunk(
       }
 
       dispatch(setLoading(false))
+      dispatch(setLogged(true))
       dispatch(setToken(data.body.token))
     } catch (error) {
       dispatch(setLoading(false))

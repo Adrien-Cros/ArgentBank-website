@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import {
   setFirstName,
   setLastName,
+  setLogged,
   setToken,
   setUsername,
 } from '../../../store/loginSlicer'
@@ -23,6 +24,7 @@ function Header() {
     dispatch(setUsername(null))
     dispatch(setLastName(null))
     dispatch(setFirstName(null))
+    dispatch(setLogged(false))
     navigate('/')
   }
 

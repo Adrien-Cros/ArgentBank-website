@@ -4,15 +4,19 @@ import Profile from '../../pages/Profile/profile'
 import Footer from '../Layout/Footer/Footer'
 import Header from '../Layout/Header/Header'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function Routing() {
+  const authState = useSelector((state) => state.auth)
   return (
     <Router>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
+        {authState.isLogged === true && (
+          <Route path="/profile" element={<Profile />} />
+        )}
       </Routes>
       <Footer />
     </Router>

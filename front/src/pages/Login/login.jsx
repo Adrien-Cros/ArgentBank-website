@@ -11,9 +11,9 @@ function Login() {
   const dispatch = useDispatch()
   const authState = useSelector((state) => state.auth)
 
-  useEffect(() => {
+  /* useEffect(() => {
     dispatch(tryLogin)
-  }, [dispatch])
+  }, [dispatch]) */
 
   useEffect(() => {
     if (authState.token) {
