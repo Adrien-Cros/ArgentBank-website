@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Navigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { tryLogin } from '../../store/loginConnect'
-import { userInfo } from '../../store/userProfile'
 
 import '@fortawesome/fontawesome-free/css/all.css'
 import './login.css'
@@ -11,20 +10,11 @@ function Login() {
   const dispatch = useDispatch()
   const authState = useSelector((state) => state.auth)
 
-  /* useEffect(() => {
-    dispatch(tryLogin)
-  }, [dispatch]) */
-
-  useEffect(() => {
-    if (authState.token) {
-      dispatch(userInfo({ token: authState.token }))
-    }
-  }, [dispatch, authState.token])
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   // const [remember, setRemember] = useState(false)
 
+  //Try to log the user to the API, and then find all informations about the user
   const handleSubmit = async (event) => {
     event.preventDefault()
     dispatch(tryLogin({ email, password }))

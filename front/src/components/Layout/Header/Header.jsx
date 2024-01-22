@@ -1,34 +1,19 @@
 import ArgentBankLogo from '../../../../src/assets/argentBankLogo.png'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import {
-  setFirstName,
-  setLastName,
-  setLogged,
-  setToken,
-  setUsername,
-} from '../../../store/loginSlicer'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import useLogoutUser from '../../../store/logoutUser'
 
 import '@fortawesome/fontawesome-free/css/all.css'
 import './header.css'
 
 function Header() {
   const authState = useSelector((state) => state.auth)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const logoutUser = useLogoutUser()
 
   const handleDisconnect = (event) => {
     event.preventDefault()
-    dispatch(setToken(null))
-    dispatch(setUsername(null))
-    dispatch(setLastName(null))
-    dispatch(setFirstName(null))
-    dispatch(setLogged(false))
-    navigate('/')
+    logoutUser()
   }
-
-  useEffect(() => {}, [dispatch])
 
   return (
     <nav className="main-nav">
