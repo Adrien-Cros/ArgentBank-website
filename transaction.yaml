@@ -1,0 +1,223 @@
+swagger: '2.0'
+info:
+  title: Bank Argent API documentation
+  description: Contains all available API endpoints in this codebase
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: 127.0.0.1:3001
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /user/{month}/transactions:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: Get all transactions from a user for specific a month
+      parameters:
+        - in: path
+          name: month
+          description: Current month
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User transactions history retrieved successully
+          schema:
+            $ref: '#/definitions/TransactionsByMonth'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+          
+  /user/{transactionID}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: Get all informations about a transaction
+      parameters:
+        - in: path
+          name: transactionID
+          description: TransactionID to retrieve
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User transactions history retrieved successully
+          schema:
+            $ref: '#/definitions/Transactions'
+        '400':
+          description: Invalid Fields
+        '404':
+          description: Cannot retrieve this transaction ID
+        '500':
+          description: Internal Server Error
+          
+  /user/{transactionID}/description:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: Add a note and/or a category for the transaction
+      parameters:
+        - in: path
+          name: transactionID
+          description: TransactionID to retrieve
+          required: true
+          type: number
+        - in: body
+          name: body
+          description: API for adding note/category on a transaction
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionDescription'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction note/category succefully added
+        '400':
+          description: Invalid Fields
+        '404':
+          description: Cannot retrieve this transaction ID
+        '500':
+          description: Internal Server Error
+
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: Modify the note and/or the category of the transaction
+      parameters:
+        - in: path
+          name: transactionID
+          description: TransactionID to retrieve
+          required: true
+          type: number
+        - in: body
+          name: body
+          description: API for modify note/category on a transaction
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionDescription'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction note/category succefully updated
+        '400':
+          description: Invalid Fields
+        '404':
+          description: Cannot retrieve this transaction ID
+        '500':
+          description: Internal Server Error
+          
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: Delete the note and/or the category of the transaction
+      parameters:
+        - in: path
+          name: transactionID
+          description: TransactionID to retrieve
+          required: true
+          type: number
+        - in: query
+          name: deleteNote
+          description: Set to true if you want to delete the note
+          required: false
+          type: boolean
+        - in: query
+          name: deleteCategory
+          description: Set to true if you want to delete the category
+          required: false
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction note/category succefully deleted
+        '400':
+          description: Invalid Fields
+        '404':
+          description: Cannot retrieve this transaction ID
+        '500':
+          description: Internal Server Error
+  
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object
+        properties:
+          id:
+            type: string
+          email:
+            type: string
+            
+  TransactionsByMonth:
+    type: object
+    properties:
+      transactions:
+        type: array
+        items:
+          $ref: '#/definitions/Transactions'
+      
+  Transactions:
+    type: object
+    properties:
+      transactionID:
+        type: number
+        description: transaction ID
+      date:
+        description: date
+        type: "string"
+      description:
+        type: object
+        properties:
+          transactionType:
+            type: string
+            description: type of the transaction
+          category:
+            type: string
+            description: category of the transaction
+          note:
+            type: string
+            description: note about the transaction
+      amount:
+        type: number
+        description: transaction cost
+      balance:
+        type: number
+        description: current current balance 
+        
+  TransactionDescription:
+    type: object
+    properties:
+      category:
+        type: string
+      note:
+        type: string
+      
