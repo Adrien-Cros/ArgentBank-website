@@ -9,7 +9,7 @@ basePath: /api/v1
 schemes:
   - http
 paths:
-  /user/{month}/transactions:
+  /transactions/date/{month}:
     get:
       security:
         - Bearer: []
@@ -34,7 +34,7 @@ paths:
         '500':
           description: Internal Server Error
           
-  /user/{transactionID}:
+  /transactions/{transactionID}:
     get:
       security:
         - Bearer: []
@@ -53,7 +53,7 @@ paths:
         '200':
           description: User transactions history retrieved successully
           schema:
-            $ref: '#/definitions/Transactions'
+            $ref: '#/definitions/Transaction'
         '400':
           description: Invalid Fields
         '404':
@@ -61,7 +61,7 @@ paths:
         '500':
           description: Internal Server Error
           
-  /user/{transactionID}/description:
+  /transactions/{transactionID}/description:
     post:
       security:
         - Bearer: []
@@ -180,12 +180,12 @@ definitions:
   TransactionsByMonth:
     type: object
     properties:
-      transactions:
+      transaction:
         type: array
         items:
-          $ref: '#/definitions/Transactions'
+          $ref: '#/definitions/Transaction'
       
-  Transactions:
+  Transaction:
     type: object
     properties:
       transactionID:

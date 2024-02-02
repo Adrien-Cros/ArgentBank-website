@@ -12,17 +12,12 @@ function Login() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  // const [remember, setRemember] = useState(false)
 
-  //Try to log the user to the API, and then find all informations about the user
+  // Try to log the user to the API, and then find all informations about the user
   const handleSubmit = async (event) => {
     event.preventDefault()
     dispatch(tryLogin({ email, password }))
   }
-
-  /* const handleRemember = () => {
-    setRemember(!remember)
-  } */
 
   return (
     <main className="main bg-dark">
@@ -49,12 +44,7 @@ function Login() {
             />
           </div>
           <div className="input-remember">
-            <input
-              type="checkbox"
-              id="remember-me"
-              /* checked={remember}
-              onChange={handleRemember}*/
-            />
+            <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
           <button type="submit" className="sign-in-button">
@@ -64,11 +54,11 @@ function Login() {
         {authState.token ? <Navigate to="/profile" /> : null}
         {authState.error != null && (
           <div>
-            <p>
+            <p className="error-desc">
               There is a problem with your Username/Password. Please check for
               typos or other errors and try again.
             </p>
-            <p>Error Details: {authState.error}</p>
+            <p className="error-desc">{authState.error}</p>
           </div>
         )}
         {authState.isLoading === true && <p>Loading...</p>}

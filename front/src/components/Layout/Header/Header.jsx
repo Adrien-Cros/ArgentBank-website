@@ -29,17 +29,17 @@ function Header() {
         {authState.token ? (
           <>
             <Link to="/profile" className="main-nav-item">
-              <i className="fa fa-user-circle"></i>
+              <i className="fa fa-user-circle log-icon"></i>
               {authState.userName}
             </Link>
             <Link className="main-nav-item" onClick={handleDisconnect}>
-              <i className="fa fa-sign-out"></i>
+              <i className="fa fa-sign-out log-icon"></i>
               Sign Out
             </Link>
           </>
         ) : (
           <Link to="/login" className="main-nav-item">
-            <i className="fa fa-user-circle"></i>
+            <i className="fa fa-user-circle log-icon"></i>
             Sign In
           </Link>
         )}
