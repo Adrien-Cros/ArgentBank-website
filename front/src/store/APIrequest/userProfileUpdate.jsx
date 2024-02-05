@@ -1,25 +1,23 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import {
-  setLoading,
-  setError,
-  setUsername,
-  setFirstName,
-  setLastName,
-} from './loginSlicer'
+import { setLoading, setError, setUsername } from '../reducer/loginSlicer'
 
-export const userInfo = createAsyncThunk(
-  'user',
-  async ({ token }, { dispatch }) => {
+export const updateUsername = createAsyncThunk(
+  'userUpdate',
+  async ({ userName, token }, { dispatch }) => {
     try {
       dispatch(setLoading(true))
       const response = await fetch(
         'http://127.0.0.1:3001/api/v1/user/profile',
         {
-          method: 'POST',
+          method: 'PUT',
           headers: {
+            'Content-Type': 'application/json',
             accept: '*/*',
             Authorization: `Bearer ${token}`,
           },
+          body: JSON.stringify({
+            userName: userName,
+          }),
         }
       )
 
@@ -28,9 +26,7 @@ export const userInfo = createAsyncThunk(
         throw new Error(data.message)
       }
       dispatch(setLoading(false))
-      dispatch(setUsername(data.body.userName))
-      dispatch(setFirstName(data.body.firstName))
-      dispatch(setLastName(data.body.lastName))
+      dispatch(setUsername(userName))
     } catch (error) {
       dispatch(setLoading(false))
       dispatch(setError(error.message))

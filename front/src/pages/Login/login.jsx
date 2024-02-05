@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Navigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { tryLogin } from '../../store/loginConnect'
+import { tryLogin } from '../../store/APIrequest/loginConnect'
 
 import '@fortawesome/fontawesome-free/css/all.css'
 import './login.css'

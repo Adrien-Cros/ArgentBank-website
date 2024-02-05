@@ -1,6 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { setLoading, setToken, setError, setLogged } from './loginSlicer'
-import { userInfo } from './userProfile'
+import {
+  setLoading,
+  setToken,
+  setError,
+  setLogged,
+} from '../reducer/loginSlicer'
+import { userInfo } from '../APIrequest/userProfile'
 
 export const tryLogin = createAsyncThunk(
   'auth/tryLogin',

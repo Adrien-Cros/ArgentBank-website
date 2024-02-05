@@ -1,7 +1,7 @@
 import ArgentBankLogo from '../../../../src/assets/argentBankLogo.png'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import useLogoutUser from '../../../store/logoutUser'
+import useLogoutUser from '../../../store/logout/logoutUser'
 
 import '@fortawesome/fontawesome-free/css/all.css'
 import './header.css'

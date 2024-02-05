@@ -7,7 +7,7 @@ import {
   setLastName,
   setLogged,
   setUsername,
-} from './loginSlicer'
+} from '../reducer/loginSlicer'
 
 const useLogoutUser = () => {
   const dispatch = useDispatch()

@@ -9,7 +9,7 @@ basePath: /api/v1
 schemes:
   - http
 paths:
-  /transactions/date/{month}:
+  /transactions/date/year/{month}:
     get:
       security:
         - Bearer: []
@@ -31,6 +31,8 @@ paths:
             $ref: '#/definitions/TransactionsByMonth'
         '400':
           description: Invalid Fields
+        '401':
+          description: Unauthorized
         '500':
           description: Internal Server Error
           
@@ -56,6 +58,8 @@ paths:
             $ref: '#/definitions/Transaction'
         '400':
           description: Invalid Fields
+        '401':
+          description: Unauthorized
         '404':
           description: Cannot retrieve this transaction ID
         '500':
@@ -83,21 +87,25 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
-          description: Transaction note/category succefully added
+        '201':
+          description: Created
         '400':
           description: Invalid Fields
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
         '404':
           description: Cannot retrieve this transaction ID
         '500':
           description: Internal Server Error
 
-    put:
+    patch:
       security:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: Modify the note and/or the category of the transaction
+      summary: Update the note and/or the category of the transaction
       parameters:
         - in: path
           name: transactionID
@@ -117,6 +125,10 @@ paths:
           description: Transaction note/category succefully updated
         '400':
           description: Invalid Fields
+        '401':
+          description: Unauthorize
+        '403':
+          description: Forbidden
         '404':
           description: Cannot retrieve this transaction ID
         '500':
@@ -147,10 +159,14 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        '204':
           description: Transaction note/category succefully deleted
         '400':
           description: Invalid Fields
+        '403':
+          description: Forbidden
+        '401':
+          description: Unauthorized
         '404':
           description: Cannot retrieve this transaction ID
         '500':

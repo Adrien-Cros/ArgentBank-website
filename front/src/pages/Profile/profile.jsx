@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 import AccountSection from '../../components/Profile/AccountSection/AccountSection'
-import { updateUsername } from '../../store/userProfileUpdate'
+import { updateUsername } from '../../store/APIrequest/userProfileUpdate'
 
 import './profile.css'
 
